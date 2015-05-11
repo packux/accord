@@ -112,4 +112,10 @@ object BooleanOpsTests {
   // heterogeneous types can be used with boolean combinators.
   case class HeterogeneousTypeTest( f1: Boolean, f2: String )
   val hgTypeValidator = validator[ HeterogeneousTypeTest ] { hg => ( hg.f1 is false ) or ( hg.f2 is notEmpty ) }
+
+  // While the following does not feature in any of the spec examples, it's intended to prove that
+  // multiple combinators can be applied ot the same field without splitting into multiple rules, even with a
+  // generic right-hand combinator.
+  case class SingleTermTest( term: String )
+  val singleTermValidator = validator[ SingleTermTest ] { st => st.term is notNull and notEmpty }
 }
